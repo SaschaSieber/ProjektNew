@@ -2,8 +2,5 @@ Flask
 pandas
 openpyxl
 spacy
-de-core-news-md
-selenium
 
-spacy-langdetect
 
