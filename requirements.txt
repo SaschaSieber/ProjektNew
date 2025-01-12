@@ -4,5 +4,6 @@ openpyxl
 spacy
 selenium
 undetected-chromedriver
+spacy_langdetect
 
 
