@@ -1,1 +1,9 @@
 Flask
+pandas
+openpyxl
+spacy
+de-core-news-md
+selenium
+undetected-chromedriver
+spacy-langdetect
+Werkzeug
