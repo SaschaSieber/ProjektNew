@@ -9,6 +9,8 @@ COPY . /app
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN python -m spacy download de_core_news_md
+
 # Expose the application port
 EXPOSE 8080
 
