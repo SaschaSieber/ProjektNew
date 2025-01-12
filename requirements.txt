@@ -3,5 +3,6 @@ pandas
 openpyxl
 spacy
 selenium
+undetected-chromedriver
 
 
