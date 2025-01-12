@@ -26,7 +26,7 @@ RUN wget -q -O google-chrome.deb https://dl.google.com/linux/direct/google-chrom
     rm google-chrome.deb
 
 # Install Chromedriver (matching version to Chrome)
-RUN wget -q -O /tmp/chromedriver.zip https://mirrors.huaweicloud.com/chromedriver/131.0.6778.69/chromedriver-linux64.zip && \
+RUN wget -q -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/113.0.5672.63/chromedriver_linux64.zip && \
     unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
     rm /tmp/chromedriver.zip
 
