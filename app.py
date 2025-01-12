@@ -113,4 +113,4 @@ def open_browser():
 
 if __name__ == '__main__':
     threading.Thread(target=open_browser).start()
-    app.run(debug=False, port=8080)  # Updated port to 8080
+    app.run(debug=False, host='0.0.0.0', port=8080)
