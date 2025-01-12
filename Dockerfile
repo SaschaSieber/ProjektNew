@@ -21,7 +21,7 @@ RUN apt-get update -qq && apt-get install -y \
     apt-get clean
 
 # Install Google Chrome (hardcoded version)
-RUN wget -q -O google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+RUN wget -q -O google-chrome.deb https://mirror.cs.uchicago.edu/google-chrome/pool/main/g/google-chrome-stable/google-chrome-stable_113.0.5672.126-1_amd64.deb && \
     apt-get install -y ./google-chrome.deb && \
     rm google-chrome.deb
 
