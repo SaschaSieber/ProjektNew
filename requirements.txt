@@ -1,9 +1,1 @@
-Flask==2.3.2
-pandas==2.0.3
-openpyxl==3.1.2  # For handling Excel files
-spacy==3.6.0
-de-core-news-md==3.6.0  # German model for spaCy
-selenium==4.13.0
-undetected-chromedriver==3.4.1
-spacy-langdetect==0.1.2
-Werkzeug==2.3.2
+Flask
