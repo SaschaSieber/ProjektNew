@@ -20,13 +20,13 @@ RUN apt-get update -qq && apt-get install -y \
     xdg-utils && \
     apt-get clean
 
-# Install Google Chrome (hardcoded version)
-RUN wget -q -O google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+# Install Google Chrome (version 113)
+RUN wget -q -O google-chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_113.0.5672.126-1_amd64.deb && \
     apt-get install -y ./google-chrome.deb && \
     rm google-chrome.deb
-    
-# Install Chromedriver (matching version to Chrome)
-RUN wget -q -O /tmp/chromedriver.zip https://mirrors.huaweicloud.com/chromedriver/131.0.6778.69/chromedriver-linux64.zip && \
+
+# Install Chromedriver (version 113)
+RUN wget -q -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/113.0.5672.63/chromedriver_linux64.zip && \
     unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
     rm /tmp/chromedriver.zip
 
