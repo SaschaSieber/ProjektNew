@@ -1,11 +1,15 @@
+import threading
+import webbrowser
+from urllib.request import Request, urlopen
 from flask import Flask, request, render_template, send_file
 import pandas as pd
 from Gulp_Finder import scrape_gulp
 from projekt_finder import scrape_protip
 import os
-from datetime import datetime
+import time
 import spacy
 import de_core_news_md
+from datetime import datetime
 
 nlp = de_core_news_md.load()
 
@@ -77,6 +81,36 @@ def process():
         return f"An error occurred: {str(e)}", 500
 
 
+def shutdown_server():
+    func = request.environ.get('werkzeug.server.shutdown')
+    if func is None:
+        raise RuntimeError('Not running with the Werkzeug Server')
+    func()
+
+
+BASE_URL = '82.165.126.38:8080'
+SHUTDOWN = '/shutdown'
+
+
+def request_shutdown(url=BASE_URL + SHUTDOWN):
+    req = Request(url, method='POST')
+    req = urlopen(req)
+    content = req.read()
+    print(content)
+
+
+@app.route('/shutdown', methods=['POST'])
+def shutdown():
+    shutdown_server()
+    request_shutdown()
+    return "Server shutting down..."
+
+
+def open_browser():
+    time.sleep(2)
+    webbrowser.open_new('82.165.126.38:8080')
+
+
 if __name__ == '__main__':
-    # Run the app on 0.0.0.0 to make it accessible from outside the container
-    app.run(debug=False, host='0.0.0.0', port=8080)
+    threading.Thread(target=open_browser).start()
+    app.run(debug=False, port=8080)  # Updated port to 8080
