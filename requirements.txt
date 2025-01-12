@@ -4,5 +4,5 @@ openpyxl
 spacy
 selenium
 undetected-chromedriver
-de_core_news_md
+
 
