@@ -1,9 +1,9 @@
 FROM python:3.9-slim
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Install system dependencies for Chrome and ChromeDriver
+# Install system dependencies for Chrome and Chromedriver
 RUN apt-get update -qq && apt-get install -y \
     wget \
     curl \
@@ -20,13 +20,14 @@ RUN apt-get update -qq && apt-get install -y \
     xdg-utils && \
     apt-get clean
 
-# Install Google Chrome (specific version)
-RUN wget -q -O google-chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_114.0.5735.198-1_amd64.deb && \
-    apt-get install -y ./google-chrome.deb && \
-    rm google-chrome.deb
+# Install Google Chrome from the official source
+RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt-get install -y ./google-chrome-stable_current_amd64.deb && \
+    rm google-chrome-stable_current_amd64.deb
 
-# Install Chromedriver (specific version matching Chrome version)
-RUN wget -q -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip && \
+# Install Chromedriver dynamically during the build process
+RUN CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
+    wget -q -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip && \
     unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
     rm /tmp/chromedriver.zip
 
