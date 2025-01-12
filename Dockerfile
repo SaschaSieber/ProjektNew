@@ -3,24 +3,34 @@ FROM python:3.9-slim
 # Set the working directory in the container
 WORKDIR /app
 
-RUN apt-get update -qq -y && \
-    apt-get install -y \
-        libasound2 \
-        libatk-bridge2.0-0 \
-        libgtk-4-1 \
-        libnss3 \
-        xdg-utils \
-        wget && \
-    wget -q -O chrome-linux64.zip https://bit.ly/chrome-linux64-121-0-6167-85 && \
-    unzip chrome-linux64.zip && \
-    rm chrome-linux64.zip && \
-    mv chrome-linux64 /opt/chrome/ && \
-    ln -s /opt/chrome/chrome /usr/local/bin/ && \
-    wget -q -O chromedriver-linux64.zip https://bit.ly/chromedriver-linux64-121-0-6167-85 && \
-    unzip -j chromedriver-linux64.zip chromedriver-linux64/chromedriver && \
-    rm chromedriver-linux64.zip && \
-    mv chromedriver /usr/local/bin/
-    
+# Install system dependencies for Chrome and Chromedriver
+RUN apt-get update -qq && apt-get install -y \
+    wget \
+    curl \
+    unzip \
+    libglib2.0-0 \
+    libnss3 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    libx11-xcb1 \
+    libgdk-pixbuf2.0-0 \
+    libasound2 \
+    fonts-liberation \
+    libxss1 \
+    xdg-utils && \
+    apt-get clean
+
+# Install Google Chrome from the official source
+RUN wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+    apt-get install -y ./google-chrome-stable_current_amd64.deb && \
+    rm google-chrome-stable_current_amd64.deb
+
+# Install Chromedriver dynamically during the build process
+RUN CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE) && \
+    wget -q -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip && \
+    unzip /tmp/chromedriver.zip -d /usr/local/bin/ && \
+    rm /tmp/chromedriver.zip
+
 # Copy application files and requirements to the container
 COPY . /app
 
