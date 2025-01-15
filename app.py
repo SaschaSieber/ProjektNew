@@ -31,15 +31,7 @@ def home():
 def process():
     try:
         website = request.form.get('website')
-        threshold = request.form.get('threshold')
-
-        if not threshold:
-            return "Threshold must be provided.", 400
-        try:
-            threshold = float(threshold)
-        except ValueError:
-            return "Invalid threshold value.", 400
-
+        
         # Handle inclusion file upload
         inclusion_file = request.files.get('inclusion_file')
         if not inclusion_file:
