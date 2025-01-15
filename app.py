@@ -3,8 +3,9 @@ import webbrowser
 from urllib.request import Request, urlopen
 from flask import Flask, request, render_template, send_file
 import pandas as pd
-from Gulp_Finder import scrape_gulp
-from projekt_finder import scrape_protip
+from Simple_Gulp_Finder import scrape_gulp
+#from projekt_finder import scrape_protip
+from Simple_Projekt_Finder import scrape_protip
 import os
 import time
 import spacy
