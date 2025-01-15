@@ -24,7 +24,7 @@ os.makedirs(RESULTS_FOLDER, exist_ok=True)
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('NewLanding.html')
 
 
 @app.route('/process', methods=['POST'])
