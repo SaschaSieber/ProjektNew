@@ -64,7 +64,7 @@ def process():
 
         if website == "Gulp":
             output_filename = f"Ergebnis_Gulp_{current_date}.xlsx"
-            updated_df = scrape_gulp(inclusion_df, 0.2, exclusion_terms)
+            updated_df = scrape_gulp(inclusion_df, exclusion_terms)
 
         elif website == "Protip":
             output_filename = f"Ergebnis_Protip_{current_date}.xlsx"
